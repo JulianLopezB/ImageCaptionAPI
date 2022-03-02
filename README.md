@@ -7,7 +7,7 @@ Credits to [ruotianluo](https://github.com/ruotianluo). For details on the imple
 ## Locally
 
 ```bash
-$ git clone (this repo)
+$ git clone https://github.com/JulianLopezB/ImageCaptionAPI.git
 $ cd ImageCaptionAPI
 $ pip install virtualenv
 $ virtualenv imagecaption
