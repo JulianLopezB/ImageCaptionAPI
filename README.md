@@ -11,15 +11,13 @@ $ git clone https://github.com/JulianLopezB/ImageCaptionAPI.git
 $ cd ImageCaptionAPI
 $ pip install virtualenv
 $ virtualenv imagecaption
-$ source imagecaption/bin/activatev
-$ pip install -r requirements.txt
-$ pip install git+https://github.com/ruotianluo/ImageCaptioning.pytorch.git
-$ mkdir model_data
+$ source imagecaption/bin/activate
+$ pip install -r requirements.txt git+https://github.com/ruotianluo/ImageCaptioning.pytorch.git
 ```
 
 ### Download pretrain models 
 ```bash
-$ pip install gdown
+$ mkdir model_data
 $ gdown --id 1VmUzgu0qlmCMqM1ajoOZxOXP3hiC_qlL -O /model_data/model-best.pth
 $ gdown --id 1zQe00W02veVYq-hdq5WsPOS3OPkNdq79 -O /model_data/infos_trans12-best.pkl
 $ wget -O /model_data/detectron_model.pth wget https://dl.fbaipublicfiles.com/vilbert-multi-task/detectron_model.pth
