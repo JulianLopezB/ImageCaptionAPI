@@ -31,7 +31,7 @@ $ wget -O /model_data/detectron_model.yaml wget https://dl.fbaipublicfiles.com/v
 $ python main.py
 ```
 ## Cloud
-### Cloud Run (see [here](https://cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-python-service#deploy)
+### Cloud Run (see [here](https://cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-python-service#deploy))
 ```bash
 $ gcloud run deploy
 ```
