@@ -2,6 +2,8 @@ API for Image Captioning based on the papers [Self-critical Sequence Training fo
 
 Credits to [ruotianluo](https://github.com/ruotianluo). For details on the implementation see his [colab](https://colab.research.google.com/github/ruotianluo/ImageCaptioning.pytorch/blob/colab/notebooks/captioning_demo.ipynb)
 
+![](static/example.png)
+
 # Steps 
 
 ## Locally
@@ -29,7 +31,7 @@ $ wget -O /model_data/detectron_model.yaml wget https://dl.fbaipublicfiles.com/v
 $ python main.py
 ```
 ## Cloud
-### Cloud Run (see [here](https://cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-python-service#deploy))
+### Cloud Run (see [here](https://cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-python-service#deploy)
 ```bash
 $ gcloud run deploy
 ```
