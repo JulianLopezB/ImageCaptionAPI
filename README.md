@@ -9,11 +9,11 @@ Credits to [ruotianluo](https://github.com/ruotianluo). For details on the imple
 ## Locally
 
 ```bash
-$ git clone https://github.com/JulianLopezB/ImageCaptionAPI.git
-$ cd ImageCaptionAPI
 $ pip install virtualenv
 $ virtualenv imagecaption
 $ source imagecaption/bin/activate
+$ git clone https://github.com/JulianLopezB/ImageCaptionAPI.git
+$ cd ImageCaptionAPI
 $ pip install -r requirements.txt git+https://github.com/ruotianluo/ImageCaptioning.pytorch.git
 ```
 
@@ -35,3 +35,11 @@ $ python main.py
 ```bash
 $ gcloud run deploy
 ```
+
+# To Do:
+- [x] object detection in images (jpg, jpeg, png)
+- [x] object detection in videos (mp4, avi, mkv)
+- [ ] add progress bar to webapp
+- [ ] add Dockerfile
+- [ ] create dropdown in webapp that allows choosing different models
+- [ ] deploy to cloud

@@ -1,17 +1,16 @@
 
-import os
 import io
 import torch
 from flask import Flask, request, jsonify, render_template, redirect
 from werkzeug.utils import secure_filename
-from PIL import Image, ImageFont, ImageDraw
-import shutil
+from feature_extractor import FeatureExtractor
 import captioning
 import captioning.utils.misc
 import captioning.models
+from src.utils import *
 import sys
+import os
 sys.path.append('vqa-maskrcnn-benchmark')
-from feature_extractor import FeatureExtractor
 
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -37,22 +36,20 @@ def refresh_paths():
     print(f'Uploading temporary files to {uploads_dir}')
     os.makedirs(uploads_dir, exist_ok=True)
 
-def clean_path(dirpath):
-    if os.path.exists(dirpath) and os.path.isdir(dirpath):
-        shutil.rmtree(dirpath)
+def get_img_predictions(img_url):
+    try:
+        #image_path = feature_extractor.get_actual_image(img_url)
+        prediction = '<br>'.join(get_captions(feature_extractor(img_url)))
+        data = {"prediction": prediction}
+        return jsonify(data)
+    except Exception as e:
+        return jsonify({"error": str(e)})
 
-def clean_path_content(folder):
+def get_captions(img_feature):
+    # Return the 5 captions from beam serach with beam size 5
+    return model.decode_sequence(model(img_feature.mean(0)[None], img_feature[None], mode='sample', opt={'beam_size':5, 'sample_method':'beam_search', 'sample_n':5})[0])
 
-    for filename in os.listdir(folder):
-        file_path = os.path.join(folder, filename)
-        try:
-            if os.path.isfile(file_path) or os.path.islink(file_path):
-                os.unlink(file_path)
-            elif os.path.isdir(file_path):
-                shutil.rmtree(file_path)
-            print(f'Files in {folder} deleted')
-        except Exception as e:
-            print('Failed to delete %s. Reason: %s' % (file_path, e))
+
 
 @app.route("/", methods=["GET", "POST"])
 def predict():
@@ -68,23 +65,7 @@ def predict():
         file.save(img_input)
         predictions = get_img_predictions(img_input)
         return predictions
-        #return redirect(output_path)
     return render_template("index.html")
-
-
-def get_img_predictions(img_url):
-    try:
-        #image_path = feature_extractor.get_actual_image(img_url)
-        prediction = '<br>'.join(get_captions(feature_extractor(img_url)))
-        data = {"prediction": prediction}
-        return jsonify(data)
-    except Exception as e:
-        return jsonify({"error": str(e)})
-
-def get_captions(img_feature):
-    # Return the 5 captions from beam serach with beam size 5
-    return model.decode_sequence(model(img_feature.mean(0)[None], img_feature[None], mode='sample', opt={'beam_size':5, 'sample_method':'beam_search', 'sample_n':5})[0])
-
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
