@@ -6,7 +6,7 @@ Credits to [ruotianluo](https://github.com/ruotianluo). For details on the imple
 
 # Steps 
 
-## Locally
+## Deploy Locally
 
 ```bash
 $ pip install virtualenv
@@ -30,16 +30,13 @@ $ wget -O /model_data/detectron_model.yaml wget https://dl.fbaipublicfiles.com/v
 ```bash
 $ python main.py
 ```
-## Cloud
+## Deploy on Cloud
 ### Cloud Run (see [here](https://cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-python-service#deploy))
 ```bash
 $ gcloud run deploy
 ```
 
 # To Do:
-- [x] object detection in images (jpg, jpeg, png)
-- [x] object detection in videos (mp4, avi, mkv)
-- [ ] add progress bar to webapp
-- [ ] add Dockerfile
-- [ ] create dropdown in webapp that allows choosing different models
-- [ ] deploy to cloud
+
+- [x] render result in same page
+- [ ] images caption in additional formats (png, jpg)
